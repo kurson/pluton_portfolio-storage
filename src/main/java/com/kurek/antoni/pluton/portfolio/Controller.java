@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class Controller {
     private final Handler handler;
 
-    @GetMapping("/ownedPortfolios/{email}")
+    @GetMapping("/portfolio/owned/{email}")
     public OwnedPortfolioDto[] getOwnedPortfolios(@PathVariable String email) {
         return handler.getOwnedPortfolios(email);
     }

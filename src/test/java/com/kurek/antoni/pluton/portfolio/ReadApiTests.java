@@ -34,7 +34,7 @@ class ReadApiTests {
         when(repository.findByOwnerEmail(email)).thenReturn(List.of(portfolio));
         //when get owned portfolio endpoint is called
         //then return array of 1
-        this.mockMvc.perform(get("/ownedPortfolios/" + email))
+        this.mockMvc.perform(get("/portfolio/owned/" + email))
                     .andExpect(status().isOk())
                     .andExpect(content().json(mapper.writeValueAsString(new OwnedPortfolioDto[]{new OwnedPortfolioDto(
                             portfolio)})));
