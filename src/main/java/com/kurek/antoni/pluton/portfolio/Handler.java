@@ -1,6 +1,7 @@
 package com.kurek.antoni.pluton.portfolio;
 
 import com.kurek.antoni.pluton.portfolio.dtos.OwnedPortfolioDto;
+import com.kurek.antoni.pluton.portfolio.dtos.PortfolioInputDto;
 import com.kurek.antoni.pluton.portfolio.model.Portfolio;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,10 @@ public class Handler {
     public OwnedPortfolioDto[] getOwnedPortfolios(String email) {
         List<Portfolio> portfolioList = repository.findByOwnerEmail(email);
         return portfolioList.stream().map(OwnedPortfolioDto::new).toArray(OwnedPortfolioDto[]::new);
+    }
+
+    public Portfolio createPortfolio(PortfolioInputDto inputDto) {
+        return repository.save(new Portfolio(inputDto));
     }
 
 //    public Asset createAsset(UUID portfolioId, Asset asset) {
