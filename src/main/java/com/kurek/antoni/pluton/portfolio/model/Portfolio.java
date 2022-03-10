@@ -10,5 +10,9 @@ import java.util.UUID;
 public record Portfolio(@Id UUID id,
                         String name,
                         String description,
+                        String ownerEmail,
                         Map<Integer, Asset> assets) {
+    public Portfolio(String name, String ownerEmail) {
+        this(UUID.randomUUID(), name, "", ownerEmail, null);
+    }
 }
