@@ -10,6 +10,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -30,6 +33,8 @@ class WriteApiTests {
                                      .contentType(MediaType.APPLICATION_JSON)
                                      .content(mapper.writeValueAsString(inputDto)))
                     .andExpect(status().isCreated());
+        //then repository is called
+        verify(repository, times(1)).save(argThat(p -> p.name().equals(inputDto.name())));
     }
 
 //    @Test
